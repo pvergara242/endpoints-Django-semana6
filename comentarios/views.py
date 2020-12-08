@@ -14,21 +14,20 @@ class Comentario(viewsets.ModelViewSet) :
     queryset = Comentario.objects.all()
     serializer_class = ComentarioSerializer
 
-    @action(methods=['GET', 'POST', 'DELETE'], detail=True)
+    @action(methods=['GET'], detail=True)
     def publicaciones(self, request, pk=None) :
-        Comentario = self.get_object()
-        if request.method == 'GET' :
-            serialized = PublicacionSerializer(Comentario.publicaciones, many=True)
-            return Response(status=status.HTTP_200_OK, data=serialized.data)
-        # if request.method == 'POST' :
-        #     publicacion_id = request.data['publicaciones']
-        #     for publicacion_id in publicaciones_ids :
-        #         publicaciones = Publicacion.objects.get(id=int(publicacion_id))
-        #         publicacion_id.publicaciones.add(publicaciones)
-        #         return Response(status=status.HTTP_201_CREATED)
-        # if request.method == 'DELETE' :
-        #     publicaciones_id = request.data['publicaciones']
-        #     for tag_id in publicaciones_id :
-        #         tag = Tags.objects.get(id=int(tag_id))
-        #         publicaciones.tags.remove(tag)
-        #         return Response(status=status.HTTP_204_NO_CONTENT)
+        comentario = self.get_object()
+        serialized = PublicacionSerializer(comentario.publicaciones)
+        return Response(status=status.HTTP_200_OK, data=serialized.data)
+        if request.method == 'POST' :
+            publicacion = request.data['comentarios']
+            for publicacion_id in publicaciones_ids :
+                publicaciones = publicacion.objects.get(id=int(publicacion_id))
+                publicacion_id.comentarios.add(publicaciones)
+                return Response(status=status.HTTP_201_CREATED)
+        if request.method == 'DELETE' :
+            publicaciones_id = request.data['comentarios']
+            for comentario_id in publicaciones_id :
+                comentario =Comentario.objects.get(id=int(comentario_id))
+                publicaciones.comentario.remove(comentario)
+                return Response(status=status.HTTP_204_NO_CONTENT)

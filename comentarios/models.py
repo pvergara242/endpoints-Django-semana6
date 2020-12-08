@@ -1,9 +1,5 @@
 from django.db import models
 
-
-
-
-
 # Create your models here.
 class Comentario(models.Model):
     autor = models.CharField(max_length=30)

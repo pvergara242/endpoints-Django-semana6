@@ -4,5 +4,5 @@ from rest_framework.routers import DefaultRouter
 
 
 router = DefaultRouter()
-router.register(r'publicaciones',Publicacion)
+router.register(r'',Publicacion)
 urlpatterns = router.urls

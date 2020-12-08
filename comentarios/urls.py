@@ -4,5 +4,5 @@ from rest_framework.routers import DefaultRouter
 
 
 router = DefaultRouter()
-router.register(r'comentarios',Comentario)
+router.register(r'',Comentario)
 urlpatterns = router.urls
